@@ -23,7 +23,9 @@ class App extends React.Component {
           <Header title="My scoreboard" totalPlayers={1 + 10}/>
           {
             this.state.players.map((player, idex) => <Player key={idex} id={player.id} name={player.name}
-                                                             score={player.score} removePlayer={this.handleRemovePlayer}/>)
+                                                             score={player.score}
+                                                             removePlayer={this.handleRemovePlayer}
+                                                             changeScore={this.handleChangeScore}/>)
           }
         </div>
     );
@@ -34,6 +36,29 @@ class App extends React.Component {
     // filter : predicate
     this.setState(
         (prevState) => ({ players : prevState.players.filter(player => player.id !== id)})
+    )
+  }
+
+  handleChangeScore = (id, delta) => {
+    console.log('handleChangeScore {} {}',id, delta);
+    this.setState(
+        (prevState) => {
+/*            const player = prevState.players.find(player => player.id == id);
+            player.score += delta;
+
+            return {
+              players : [ ...prevState.players]  // [] new 생성 ,  ... : dep copy
+            }*/
+            //map 이용
+            return {
+              players : prevState.players.map(player => {
+                if(player.id == id){
+                  player.score += delta;
+                }
+                return player;
+              })
+            }
+        }
     )
   }
 }

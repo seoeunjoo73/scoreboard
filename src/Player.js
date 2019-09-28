@@ -8,6 +8,6 @@ export const Player=(props)=>
                 <button className="remove-player" onClick={function(){props.removePlayer(props.id)}}>X</button>
                 {props.name}
             </span>
-            <Counter score={props.score}/>
+            <Counter score={props.score} changeScore={props.changeScore} id={props.id}/>
         </div>
     );
